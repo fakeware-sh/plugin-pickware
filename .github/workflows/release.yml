@@ -1,0 +1,74 @@
+name: release-please
+
+on:
+  push:
+    branches: [main]
+
+permissions: {}
+
+concurrency:
+  group: release-please-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+    steps:
+      - uses: googleapis/release-please-action@v5
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+      - name: Resolve release PR branch
+        id: pr
+        if: ${{ steps.release.outputs.pr }}
+        env:
+          PR: ${{ steps.release.outputs.pr }}
+        run: echo "branch=$(echo "$PR" | jq -r '.headBranchName')" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v6
+        if: ${{ steps.release.outputs.pr }}
+        with:
+          ref: ${{ steps.pr.outputs.branch }}
+      - uses: oven-sh/setup-bun@v2
+        if: ${{ steps.release.outputs.pr }}
+      - name: Sync bun.lock with bumped version
+        if: ${{ steps.release.outputs.pr }}
+        run: |
+          rm -f bun.lock
+          bun install
+          if ! git diff --quiet bun.lock; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add bun.lock
+            git commit -m "chore: sync bun.lock"
+            git push origin "HEAD:${{ steps.pr.outputs.branch }}"
+          fi
+
+  publish:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - run: npm install -g npm@latest
+      - name: Publish @fakeware/plugin-pickware
+        run: |
+          bun pm pack --destination .
+          npm publish ./*.tgz --access public
