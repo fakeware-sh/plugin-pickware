@@ -14,7 +14,7 @@ describe('warehousesFetcher', () => {
   test('merges rows from a search response into the extensions bag', () => {
     const extensions: Record<string, unknown> = {}
     const data = { extensions } as Parameters<typeof warehousesFetcher.merge>[0]
-    warehousesFetcher.merge(data, { data: [{ id: 'wh-1', code: 'WH-01' }] })
+    warehousesFetcher.merge(data, { data: { total: 1, data: [{ id: 'wh-1', code: 'WH-01' }] } })
     expect(extensions.pickwareWarehouses).toEqual([{ id: 'wh-1', code: 'WH-01' }])
   })
 
@@ -30,11 +30,13 @@ describe('warehousesFetcher', () => {
     const client = {
       invoke: (path: string, params: unknown) => {
         calls.push([path, params])
-        return Promise.resolve({ data: [] })
+        return Promise.resolve({ data: { data: [] } })
       },
     } as unknown as Parameters<typeof warehousesFetcher.fetch>[0]
     await warehousesFetcher.fetch(client)
-    expect(calls).toEqual([['post /search/pickware-erp-warehouse', { body: { limit: 500 } }]])
+    expect(calls).toEqual([
+      ['searchPickwareWarehouse post /search/pickware-erp-warehouse', { body: { limit: 500 } }],
+    ])
   })
 })
 

@@ -17,11 +17,11 @@ export const warehousesFetcher: ShopContextFetcher = {
   entity: 'pickware warehouses',
   fetch: (client) =>
     (client.invoke as (path: string, params: unknown) => Promise<unknown>)(
-      'post /search/pickware-erp-warehouse',
+      'searchPickwareWarehouse post /search/pickware-erp-warehouse',
       { body: { limit: 500 } },
     ),
   merge: (data, raw) => {
-    const rows = (raw as { data?: PickwareWarehouseRow[] } | null)?.data ?? []
-    data.extensions[PICKWARE_WAREHOUSES_KEY] = rows
+    const body = (raw as { data?: { data?: PickwareWarehouseRow[] } } | null)?.data
+    data.extensions[PICKWARE_WAREHOUSES_KEY] = body?.data ?? []
   },
 }
