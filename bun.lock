@@ -6,7 +6,7 @@
       "name": "@fakeware/plugin-pickware",
       "devDependencies": {
         "@biomejs/biome": "2.4.16",
-        "@fakeware/core": ">=0.0.9",
+        "@fakeware/core": "^0.0.10",
         "@types/bun": "1.3.14",
         "publint": "0.3.21",
         "tsdown": "^0.22.3",
@@ -52,7 +52,7 @@
 
     "@emnapi/wasi-threads": ["@emnapi/wasi-threads@1.2.2", "", { "dependencies": { "tslib": "^2.4.0" } }, "sha512-c95qOXkHdydNKhscBTebqEC1CVAZpyqOfVfBzQ1qgzyl3gfeldUjIggDbIZgDKsHLgnsM+igH7TJ/eAasaVuMA=="],
 
-    "@fakeware/core": ["@fakeware/core@0.0.9", "", { "dependencies": { "@shopware/api-client": "1.5.0", "jiti": "2.7.0", "zod": "4.4.3" } }, "sha512-SalEvNLucUMpc38XlasiNVz8G6vrnPmR11wNKfcKFlZJZ0MnYNuejjGJlJR4/AicqIPWL/JOZb0w+HB5uM6H8Q=="],
+    "@fakeware/core": ["@fakeware/core@0.0.10", "", { "dependencies": { "@shopware/api-client": "1.5.0", "jiti": "2.7.0", "zod": "4.4.3" } }, "sha512-chI0rdtgsA5FWR5jtQzSctS5MSVeKMPPeqcYRj7Wee73Hz2Q8fEPpnZaKMm4bv2WzsOTZLnxs5ouADMg89i0Aw=="],
 
     "@jridgewell/gen-mapping": ["@jridgewell/gen-mapping@0.3.13", "", { "dependencies": { "@jridgewell/sourcemap-codec": "^1.5.0", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA=="],
 
