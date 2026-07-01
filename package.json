@@ -1,7 +1,7 @@
 {
   "name": "@fakeware/plugin-pickware",
   "version": "1.0.0",
-  "description": "Pickware ERP plugin for fakeware. Seed warehouses, bin locations and stock into a Shopware 6 shop running Pickware",
+  "description": "Pickware ERP plugin for fakeware. Seed bin locations, suppliers, product-supplier configurations and return orders into a Shopware 6 shop running Pickware",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.16",
-    "@fakeware/core": "0.0.9",
+    "@fakeware/core": ">=0.0.9",
     "@types/bun": "1.3.14",
     "publint": "0.3.21",
     "tsdown": "^0.22.3",

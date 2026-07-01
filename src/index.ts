@@ -1,15 +1,35 @@
 import './entities'
 
-export type {
-  PickwareBinLocationRecord,
-  PickwareStockMovementRecord,
-  PickwareWarehouseRecord,
+export {
+  type Id,
+  PICKWARE_LIVE_VERSION,
+  type PickwareBinLocationRecord,
+  type PickwarePrice,
+  type PickwareProductSupplierConfigurationRecord,
+  type PickwareReturnOrderLineItemRecord,
+  type PickwareReturnOrderRecord,
+  type PickwareReturnReason,
+  type PickwareSupplierRecord,
 } from './entities'
 export {
   PICKWARE_WAREHOUSES_KEY,
   type PickwareWarehouseRow,
   pickwareWarehouses,
+  warehouseIdByCode,
   warehousesFetcher,
 } from './fetchers'
-export { type StockMovementInInput, stockMovementIn } from './helpers'
+export {
+  type BinLocationInput,
+  binLocation,
+  type PickwareReturnState,
+  type ProductSupplierConfigInput,
+  productSupplierConfig,
+  RETURN_ORDER_INITIAL_STATE,
+  RETURN_ORDER_STATE_MACHINE,
+  type ReturnLineInput,
+  type ReturnOrderInput,
+  returnOrder,
+  type SupplierInput,
+  supplier,
+} from './helpers'
 export { pickware } from './plugin'
