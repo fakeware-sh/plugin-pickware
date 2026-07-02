@@ -28,6 +28,7 @@ const BASE: ShopContextData = {
   taxes: [],
   paymentMethods: [],
   shippingMethods: [],
+  mediaFolders: [],
   extensions: {},
 }
 
