@@ -37,12 +37,14 @@ export interface BinLocationInput {
   $key?: string
   code: string
   warehouseCode: string
+  position?: number
 }
 
 export function binLocation(input: BinLocationInput): PickwareBinLocationRecord {
   return pruneUndefined({
     $key: input.$key,
     code: input.code,
+    position: input.position,
     warehouseId: shopToken(`pickwareWarehouse:${input.warehouseCode}`, (s) =>
       warehouseIdByCode(s.extensions, input.warehouseCode),
     ),

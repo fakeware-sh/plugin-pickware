@@ -8,6 +8,7 @@ export interface PickwareBinLocationRecord {
   $key?: string
   code: string
   warehouseId: Id
+  position?: number
 }
 
 export interface PickwareSupplierRecord {
