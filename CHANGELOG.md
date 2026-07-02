@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/fakeware-sh/plugin-pickware/compare/plugin-pickware-v1.1.0...plugin-pickware-v1.2.0) (2026-07-02)
+
+
+### Features
+
+* add inline product supplier configuration support ([aa64c61](https://github.com/fakeware-sh/plugin-pickware/commit/aa64c615b8b6f23ff7ec222976eaf0414893e7d3))
+* support ShopValueToken for purchasePrices ([8f120fd](https://github.com/fakeware-sh/plugin-pickware/commit/8f120fdcff612456e09fc8dab5807530380dee71))
+
+
+### Bug Fixes
+
+* missing position value ([6042cda](https://github.com/fakeware-sh/plugin-pickware/commit/6042cdaf6b056fd226d410bc2b2443767143be8d))
+
 ## [1.1.0](https://github.com/fakeware-sh/plugin-pickware/compare/plugin-pickware-v1.0.0...plugin-pickware-v1.1.0) (2026-07-01)
 
 
