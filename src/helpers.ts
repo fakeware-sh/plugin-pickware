@@ -1,4 +1,4 @@
-import { shop, shopToken } from '@fakeware/core'
+import { shop, type ShopValueToken, shopToken } from '@fakeware/core'
 import {
   type Id,
   PICKWARE_LIVE_VERSION,
@@ -66,11 +66,13 @@ export function supplier(input: SupplierInput): PickwareSupplierRecord {
   })
 }
 
+export type PickwarePriceInput = PickwarePrice | ShopValueToken<PickwarePrice>
+
 export interface ProductSupplierConfigInput {
   $key?: string
   productId: Id
   supplierId: Id
-  purchasePrices: PickwarePrice[]
+  purchasePrices: PickwarePriceInput[]
   minPurchase?: number
   purchaseSteps?: number
   supplierIsDefault?: boolean

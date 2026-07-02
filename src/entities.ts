@@ -1,4 +1,4 @@
-import type { AnyToken } from '@fakeware/core'
+import type { AnyToken, ShopValueToken } from '@fakeware/core'
 
 export const PICKWARE_LIVE_VERSION = '0fa91ce3e96a4bc2be4bd9ce752c3425'
 
@@ -32,7 +32,7 @@ export interface PickwareProductSupplierConfigurationRecord {
   supplierId: Id
   minPurchase: number
   purchaseSteps: number
-  purchasePrices: PickwarePrice[]
+  purchasePrices: (PickwarePrice | ShopValueToken<PickwarePrice>)[]
   supplierIsDefault: boolean
 }
 
