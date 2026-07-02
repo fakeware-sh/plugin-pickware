@@ -36,6 +36,11 @@ export interface PickwareProductSupplierConfigurationRecord {
   supplierIsDefault: boolean
 }
 
+export type PickwareProductSupplierConfigurationInline = Omit<
+  PickwareProductSupplierConfigurationRecord,
+  'productId'
+> & { id?: string }
+
 export type PickwareReturnReason = 'wrong_item' | 'defective' | 'other'
 
 export interface PickwareReturnOrderLineItemRecord {
@@ -75,5 +80,8 @@ declare module '@fakeware/core' {
     pickware_erp_product_supplier_configuration: PickwareProductSupplierConfigurationRecord
     pickware_erp_return_order: PickwareReturnOrderRecord
     pickware_erp_return_order_line_item: PickwareReturnOrderLineItemRecord
+  }
+  interface RecordExtensions {
+    pickwareErpProductSupplierConfigurations: PickwareProductSupplierConfigurationInline[]
   }
 }

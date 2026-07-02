@@ -1,9 +1,10 @@
-import { shop, type ShopValueToken, shopToken } from '@fakeware/core'
+import { deterministicId, shop, type ShopValueToken, shopToken } from '@fakeware/core'
 import {
   type Id,
   PICKWARE_LIVE_VERSION,
   type PickwareBinLocationRecord,
   type PickwarePrice,
+  type PickwareProductSupplierConfigurationInline,
   type PickwareProductSupplierConfigurationRecord,
   type PickwareReturnOrderLineItemRecord,
   type PickwareReturnOrderRecord,
@@ -84,6 +85,29 @@ export function productSupplierConfig(
   return pruneUndefined({
     $key: input.$key,
     productId: input.productId,
+    productVersionId: PICKWARE_LIVE_VERSION,
+    supplierId: input.supplierId,
+    minPurchase: input.minPurchase ?? 1,
+    purchaseSteps: input.purchaseSteps ?? 1,
+    purchasePrices: input.purchasePrices,
+    supplierIsDefault: input.supplierIsDefault ?? true,
+  })
+}
+
+export interface ProductSupplierConfigExtensionInput {
+  key: string
+  supplierId: Id
+  purchasePrices: PickwarePriceInput[]
+  minPurchase?: number
+  purchaseSteps?: number
+  supplierIsDefault?: boolean
+}
+
+export function productSupplierConfigExtension(
+  input: ProductSupplierConfigExtensionInput,
+): PickwareProductSupplierConfigurationInline {
+  return pruneUndefined({
+    id: deterministicId('pickware_erp_product_supplier_configuration', input.key),
     productVersionId: PICKWARE_LIVE_VERSION,
     supplierId: input.supplierId,
     minPurchase: input.minPurchase ?? 1,
